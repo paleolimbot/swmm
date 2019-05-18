@@ -4,9 +4,9 @@
 \name{swmmbin-package}
 \alias{swmmbin}
 \alias{swmmbin-package}
-\title{swmmbin: Low-level Access to EPA Stormwater Management Model (SWMM)}
+\title{swmmbin: Low-level Access to the USEPA Stormwater Management Model (SWMM)}
 \description{
-What the package does (one paragraph).
+Provides low-level Access to the USEPA Stormwater Management Model (SWMM) binaries.
 }
 \author{
 \strong{Maintainer}: Dewey Dunnington \email{dewey@fishandwhistle.net}

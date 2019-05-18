@@ -1,8 +1,8 @@
 Package: swmmbin
-Title: Low-level Access to EPA Stormwater Management Model (SWMM)
+Title: Low-level Access to the USEPA Stormwater Management Model (SWMM)
 Version: 0.0.0.9000
 Authors@R: person("Dewey", "Dunnington", email = "dewey@fishandwhistle.net", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: Provides low-level Access to the USEPA Stormwater Management Model (SWMM) binaries.
 Depends: R (>= 3.6.0)
 License: Unknown
 Encoding: UTF-8
