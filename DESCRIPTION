@@ -12,3 +12,5 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp
+URL: https://github.com/paleolimbot/swmmbin
+BugReports: https://github.com/paleolimbot/swmmbin/issues
