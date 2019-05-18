@@ -1,3 +1,4 @@
 ^swmmbin\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
+src/swmm/.+\.o$

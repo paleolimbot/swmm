@@ -11,6 +11,9 @@ RoxygenNote: 6.1.1
 LinkingTo: 
     Rcpp
 Imports: 
-    Rcpp
+    Rcpp,
+    fs
 URL: https://github.com/paleolimbot/swmmbin
 BugReports: https://github.com/paleolimbot/swmmbin/issues
+Suggests: 
+    testthat (>= 2.1.0)

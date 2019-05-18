@@ -16,9 +16,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// swmmVersion
+IntegerVector swmmVersion();
+RcppExport SEXP _swmmbin_swmmVersion() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(swmmVersion());
+    return rcpp_result_gen;
+END_RCPP
+}
+// swmmRun
+List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn);
+RcppExport SEXP _swmmbin_swmmRun(SEXP inputFileInSEXP, SEXP reportFileInSEXP, SEXP binaryFileInSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< String >::type inputFileIn(inputFileInSEXP);
+    Rcpp::traits::input_parameter< String >::type reportFileIn(reportFileInSEXP);
+    Rcpp::traits::input_parameter< String >::type binaryFileIn(binaryFileInSEXP);
+    rcpp_result_gen = Rcpp::wrap(swmmRun(inputFileIn, reportFileIn, binaryFileIn));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_swmmbin_timesTwo", (DL_FUNC) &_swmmbin_timesTwo, 1},
+    {"_swmmbin_swmmVersion", (DL_FUNC) &_swmmbin_swmmVersion, 0},
+    {"_swmmbin_swmmRun", (DL_FUNC) &_swmmbin_swmmRun, 3},
     {NULL, NULL, 0}
 };
 

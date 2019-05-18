@@ -5,3 +5,11 @@ timesTwo <- function(x) {
     .Call(`_swmmbin_timesTwo`, x)
 }
 
+swmmVersion <- function() {
+    .Call(`_swmmbin_swmmVersion`)
+}
+
+swmmRun <- function(inputFileIn, reportFileIn, binaryFileIn) {
+    .Call(`_swmmbin_swmmRun`, inputFileIn, reportFileIn, binaryFileIn)
+}
+

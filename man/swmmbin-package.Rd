@@ -8,6 +8,14 @@
 \description{
 Provides low-level Access to the USEPA Stormwater Management Model (SWMM) binaries.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/paleolimbot/swmmbin}
+  \item Report bugs at \url{https://github.com/paleolimbot/swmmbin/issues}
+}
+
+}
 \author{
 \strong{Maintainer}: Dewey Dunnington \email{dewey@fishandwhistle.net}
 

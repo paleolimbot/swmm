@@ -1,0 +1,2 @@
+SOURCES = $(wildcard swmm/*.c)
+OBJECTS = callSwmm.o RcppExports.o $(SOURCES:.c=.o)
