@@ -70,6 +70,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <R.h>
 #include <string.h>
 #include <math.h>
 #include <time.h>
@@ -816,8 +817,7 @@ void  writecon(char *s)
 //  Purpose: writes string of characters to the console.
 //
 {
-    fprintf(stdout,s);
-    fflush(stdout);
+    Rprintf(s);
 }
 
 //=============================================================================

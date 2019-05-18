@@ -4,7 +4,8 @@
 \alias{swmm_run}
 \title{Initiate a simulation run}
 \usage{
-swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE)
+swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE,
+  quiet = TRUE)
 }
 \arguments{
 \item{inp}{Path to an input file.}
@@ -14,6 +15,8 @@ swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE)
 \item{out}{Path to an output file (that does not yet exist or will be overwritten).}
 
 \item{overwrite}{Use `overwrite = TRUE` overwrite `rpt` and `out`.}
+
+\item{quiet}{Silence default SWWM output.}
 }
 \description{
 This is intended to be a drop-in replacement for [swmmr::run_swmm()].

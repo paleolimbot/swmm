@@ -7,13 +7,14 @@
 #' @param rpt Path to a report file (that does not yet exist or will be overwritten).
 #' @param out Path to an output file (that does not yet exist or will be overwritten).
 #' @param overwrite Use `overwrite = TRUE` overwrite `rpt` and `out`.
+#' @param quiet Silence default SWWM output.
 #'
 #' @export
 #'
 #' @examples
 #' swmm_run(swmm_example_file("Example1-Pre.inp"))
 #'
-swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE) {
+swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRUE) {
   overwrite <- isTRUE(overwrite)
   stopifnot(
     is_valid_input_file(inp),
@@ -29,11 +30,21 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE) {
     out <- tempfile(fileext = ".out")
   }
 
+  if(quiet) {
+    output_file <- tempfile()
+    # output_con <- file(output_file, open = "wt")
+    sink(output_file)
+    on.exit({sink(); unlink(output_file)})
+  }
+
   output <- swmmRun(
     fs::path_real(inp),
     fs::path_real(rpt),
     fs::path_real(out)
   )
+
+  # make sure there's a newline before returning to R
+  if(!quiet) message("\n")
 
   output
 }
