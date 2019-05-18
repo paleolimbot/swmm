@@ -69,12 +69,12 @@ int input_countObjects()
 //  Purpose: reads input file to determine number of system objects.
 //
 {
-    char  line[MAXLINE+1];             // line from input data file
-    char  wLine[MAXLINE+1];            // working copy of input line
-    char  *tok;                        // first string token of line
-    int   sect = -1, newsect;          // input data sections
+    char  line[MAXLINE+1];             // line from input data file     
+    char  wLine[MAXLINE+1];            // working copy of input line   
+    char  *tok;                        // first string token of line          
+    int   sect = -1, newsect;          // input data sections          
     int   errcode = 0;                 // error code
-    int   errsum = 0;                  // number of errors found
+    int   errsum = 0;                  // number of errors found                   
     int   i;
     long  lineCount = 0;
 
@@ -328,21 +328,21 @@ int  addObject(int objType, char* id)
         break;
 
       case s_PUMP:
-        if ( !project_addObject(LINK, id, Nobjects[LINK]) )
+        if ( !project_addObject(LINK, id, Nobjects[LINK]) ) 
             errcode = error_setInpError(ERR_DUP_NAME, id);
         Nobjects[LINK]++;
         Nlinks[PUMP]++;
         break;
 
       case s_ORIFICE:
-        if ( !project_addObject(LINK, id, Nobjects[LINK]) )
+        if ( !project_addObject(LINK, id, Nobjects[LINK]) ) 
             errcode = error_setInpError(ERR_DUP_NAME, id);
         Nobjects[LINK]++;
         Nlinks[ORIFICE]++;
         break;
 
       case s_WEIR:
-        if ( !project_addObject(LINK, id, Nobjects[LINK]) )
+        if ( !project_addObject(LINK, id, Nobjects[LINK]) ) 
             errcode = error_setInpError(ERR_DUP_NAME, id);
         Nobjects[LINK]++;
         Nlinks[WEIR]++;
@@ -356,13 +356,13 @@ int  addObject(int objType, char* id)
         break;
 
       case s_POLLUTANT:
-        if ( !project_addObject(POLLUT, id, Nobjects[POLLUT]) )
+        if ( !project_addObject(POLLUT, id, Nobjects[POLLUT]) ) 
             errcode = error_setInpError(ERR_DUP_NAME, id);
         Nobjects[POLLUT]++;
         break;
 
       case s_LANDUSE:
-        if ( !project_addObject(LANDUSE, id, Nobjects[LANDUSE]) )
+        if ( !project_addObject(LANDUSE, id, Nobjects[LANDUSE]) ) 
             errcode = error_setInpError(ERR_DUP_NAME, id);
         Nobjects[LANDUSE]++;
         break;
@@ -411,7 +411,7 @@ int  addObject(int objType, char* id)
         if ( match(id, "X1") )
         {
             id = strtok(NULL, SEPSTR);
-            if ( id )
+            if ( id ) 
             {
                 if ( !project_addObject(TRANSECT, id, Nobjects[TRANSECT]) )
                     errcode = error_setInpError(ERR_DUP_NAME, id);
@@ -681,7 +681,7 @@ int readTitle(char* line)
 }
 
 //=============================================================================
-
+    
 int readNode(int type)
 //
 //  Input:   type = type of node
@@ -744,7 +744,7 @@ int  findmatch(char *s, char *keyword[])
 //
 //  Input:   s = character string
 //           keyword = array of keyword strings
-//  Output:  returns index of matching keyword or -1 if no match found
+//  Output:  returns index of matching keyword or -1 if no match found  
 //  Purpose: finds match between string and array of keyword strings.
 //
 {
@@ -768,23 +768,19 @@ int  match(char *str, char *substr)
 //           (not case sensitive).
 //
 {
-    int i,j,leadingWhitespace;
+    int i,j;
 
     // --- fail if substring is empty
     if (!substr[0]) return(0);
 
     // --- skip leading blanks of str
-    leadingWhitespace = 0;
     for (i = 0; str[i]; i++)
     {
-        if (str[i] != ' ') {
-          leadingWhitespace = i;
-          break;
-        }
+        if (str[i] != ' ') break;
     }
 
     // --- check if substr matches remainder of str
-    for (i = leadingWhitespace,j = 0; substr[j]; i++,j++)
+    for (i = i,j = 0; substr[j]; i++,j++)
     {
         if (!str[i] || UCHAR(str[i]) != UCHAR(substr[j])) return(0);
     }
@@ -866,7 +862,7 @@ int  getTokens(char *s)
     for (n = 0; n < MAXTOKS; n++) Tok[n] = NULL;
     n = 0;
 
-    // --- truncate s at start of comment
+    // --- truncate s at start of comment 
     c = strchr(s,';');
     if (c) *c = '\0';
     len = strlen(s);
@@ -874,7 +870,7 @@ int  getTokens(char *s)
     // --- scan s for tokens until nothing left
     while (len > 0 && n < MAXTOKS)
     {
-        m = strcspn(s,SEPSTR);              // find token length
+        m = strcspn(s,SEPSTR);              // find token length 
         if (m == 0) s++;                    // no token found
         else
         {
@@ -885,7 +881,7 @@ int  getTokens(char *s)
                 m = strcspn(s,"\"\n");      // find end quote or new line
             }
             s[m] = '\0';                    // null-terminate the token
-            Tok[n] = s;                     // save pointer to token
+            Tok[n] = s;                     // save pointer to token 
             n++;                            // update token count
             s += m+1;                       // begin next token
         }
