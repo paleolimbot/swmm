@@ -1,7 +1,11 @@
 Package: swmm
 Title: Cross-platform Access to the USEPA Stormwater Management Model (SWMM)
 Version: 0.0.0.9000
-Authors@R: person("Dewey", "Dunnington", email = "dewey@fishandwhistle.net", role = c("aut", "cre"))
+Authors@R: person("Dewey", "Dunnington",
+       email = "dewey@fishandwhistle.net", 
+       role = c("aut", "cre"), 
+       comment = c(ORCID = "0000-0002-9415-4582")
+    )
 Description: Provides cross-platform access to the USEPA Stormwater Management Model (SWMM).
 Depends: R (>= 3.4.0)
 License: GPL-3
