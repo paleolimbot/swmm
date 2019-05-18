@@ -4,9 +4,9 @@
 \name{swmm-package}
 \alias{swmm}
 \alias{swmm-package}
-\title{swmm: Low-level Access to the USEPA Stormwater Management Model (SWMM)}
+\title{swmm: Cross-platform Access to the USEPA Stormwater Management Model (SWMM)}
 \description{
-Provides low-level Access to the USEPA Stormwater Management Model (SWMM) binaries.
+Provides cross-platform access to the USEPA Stormwater Management Model (SWMM).
 }
 \seealso{
 Useful links:
