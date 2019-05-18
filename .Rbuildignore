@@ -1,4 +1,4 @@
-^swmmbin\.Rproj$
+^swmm\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
 src/swmm/.+\.o$

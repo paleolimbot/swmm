@@ -1,9 +1,9 @@
-Package: swmmbin
+Package: swmm
 Title: Low-level Access to the USEPA Stormwater Management Model (SWMM)
 Version: 0.0.0.9000
 Authors@R: person("Dewey", "Dunnington", email = "dewey@fishandwhistle.net", role = c("aut", "cre"))
 Description: Provides low-level Access to the USEPA Stormwater Management Model (SWMM) binaries.
-Depends: R (>= 3.6.0)
+Depends: R (>= 3.4.0)
 License: Unknown
 Encoding: UTF-8
 LazyData: true
@@ -13,7 +13,7 @@ LinkingTo:
 Imports: 
     Rcpp,
     fs
-URL: https://github.com/paleolimbot/swmmbin
-BugReports: https://github.com/paleolimbot/swmmbin/issues
+URL: https://github.com/paleolimbot/swmm
+BugReports: https://github.com/paleolimbot/swmm/issues
 Suggests: 
     testthat (>= 2.1.0)

@@ -2,14 +2,14 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 timesTwo <- function(x) {
-    .Call(`_swmmbin_timesTwo`, x)
+    .Call(`_swmm_timesTwo`, x)
 }
 
 swmmVersion <- function() {
-    .Call(`_swmmbin_swmmVersion`)
+    .Call(`_swmm_swmmVersion`)
 }
 
 swmmRun <- function(inputFileIn, reportFileIn, binaryFileIn) {
-    .Call(`_swmmbin_swmmRun`, inputFileIn, reportFileIn, binaryFileIn)
+    .Call(`_swmm_swmmRun`, inputFileIn, reportFileIn, binaryFileIn)
 }
 

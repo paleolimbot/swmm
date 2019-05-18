@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // timesTwo
 NumericVector timesTwo(NumericVector x);
-RcppExport SEXP _swmmbin_timesTwo(SEXP xSEXP) {
+RcppExport SEXP _swmm_timesTwo(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // swmmVersion
 IntegerVector swmmVersion();
-RcppExport SEXP _swmmbin_swmmVersion() {
+RcppExport SEXP _swmm_swmmVersion() {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -28,7 +28,7 @@ END_RCPP
 }
 // swmmRun
 List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn);
-RcppExport SEXP _swmmbin_swmmRun(SEXP inputFileInSEXP, SEXP reportFileInSEXP, SEXP binaryFileInSEXP) {
+RcppExport SEXP _swmm_swmmRun(SEXP inputFileInSEXP, SEXP reportFileInSEXP, SEXP binaryFileInSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -41,13 +41,13 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_swmmbin_timesTwo", (DL_FUNC) &_swmmbin_timesTwo, 1},
-    {"_swmmbin_swmmVersion", (DL_FUNC) &_swmmbin_swmmVersion, 0},
-    {"_swmmbin_swmmRun", (DL_FUNC) &_swmmbin_swmmRun, 3},
+    {"_swmm_timesTwo", (DL_FUNC) &_swmm_timesTwo, 1},
+    {"_swmm_swmmVersion", (DL_FUNC) &_swmm_swmmVersion, 0},
+    {"_swmm_swmmRun", (DL_FUNC) &_swmm_swmmRun, 3},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_swmmbin(DllInfo *dll) {
+RcppExport void R_init_swmm(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

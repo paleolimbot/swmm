@@ -1,4 +1,4 @@
 library(testthat)
-library(swmmbin)
+library(swmm)
 
-test_check("swmmbin")
+test_check("swmm")

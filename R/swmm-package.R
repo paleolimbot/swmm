@@ -5,10 +5,10 @@
 # roxygen namespace tags. Modify with care!
 ## usethis namespace: start
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib swmmbin, .registration = TRUE
+#' @useDynLib swmm, .registration = TRUE
 ## usethis namespace: end
 NULL
 
 .onUnload <- function (libpath) {
-  library.dynam.unload("swmmbin", libpath)
+  library.dynam.unload("swmm", libpath)
 }
