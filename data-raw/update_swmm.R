@@ -14,6 +14,9 @@ dir.create("src/swmm")
 
 utils::unzip("data-raw/swmm/source5_1_013.zip", exdir = "src/swmm")
 
+# we don't need the main.c file (this also causes warnings since main.c writes to stdout)
+unlink("src/swmm/main.c")
+
 # cleanup
 unlink("data-raw/swmm", recursive = TRUE)
 unlink("data-raw/swmm.zip")
