@@ -9,6 +9,8 @@
 status](https://travis-ci.org/paleolimbot/swmm.svg?branch=master)](https://travis-ci.org/paleolimbot/swmm)
 [![Codecov test
 coverage](https://codecov.io/gh/paleolimbot/swmm/branch/master/graph/badge.svg)](https://codecov.io/gh/paleolimbot/swmm?branch=master)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 The goal of swmm is to provide a cross-platform interface to the [United
@@ -45,10 +47,10 @@ swmm_run(swmm_example_file("Example1-Pre.inp"))
 #> [1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library/swmm/swmm_examples/Example1-Pre.inp"
 #> 
 #> $report_file
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpLGojRB/fileed6577a0e819.rpt"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpXXoKJo/file140e63d516314.rpt"
 #> 
 #> $binary_file
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpLGojRB/fileed6564e5feaa.out"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpXXoKJo/file140e62a3fd57f.out"
 #> 
 #> $error
 #> [1] 0
