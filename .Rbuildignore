@@ -4,3 +4,4 @@
 src/swmm/.+\.o$
 ^\.travis\.yml$
 ^README\.Rmd$
+^codecov\.yml$
