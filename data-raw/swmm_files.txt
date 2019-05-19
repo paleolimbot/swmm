@@ -70,4 +70,3 @@ toposort.c
 transect.c
 treatmnt.c
 xsect.c
-xsect.dat

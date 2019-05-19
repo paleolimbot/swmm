@@ -71,11 +71,25 @@ c(input_lines[
   # windows line returns in the original
   readr::write_lines("src/swmm/input.c", sep = "\r\n")
 
+# xsect.c uses an include of xsect.dat, which is great for
+# readability but causes a warning in the CMD check.
+# solution here is to process that particular include and delete xsect.dat
+xsect_dat <- readr::read_file("src/swmm/xsect.dat")
+readr::read_file("src/swmm/xsect.c") %>%
+  stringr::str_replace(
+    "#include\\s+([\"'])xsect.dat\\1[^\n]*\n",
+    paste0("\r\n", xsect_dat, "\r\n")
+  ) %>%
+  readr::write_file("src/swmm/xsect.c")
+
+
+# ------- Remove non-source files from the src/swmm directory
+
 # we don't need the main.c file (this also causes warnings since main.c writes to stdout)
 unlink("src/swmm/main.c")
 
 # non-source files result in a package warning
-unlink(c("src/swmm/Roadmap.txt", "src/swmm/swmm5.def"))
+unlink(c("src/swmm/Roadmap.txt", "src/swmm/swmm5.def", "src/swmm/xsect.dat"))
 
 # ----- Clean previously installed SWMM files ----
 
