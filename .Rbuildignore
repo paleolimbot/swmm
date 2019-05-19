@@ -1,7 +1,6 @@
 ^swmm\.Rproj$
 ^\.Rproj\.user$
 ^data-raw$
-src/swmm/.+\.o$
 ^\.travis\.yml$
 ^README\.Rmd$
 ^codecov\.yml$

@@ -16,9 +16,6 @@ utils::unzip("data-raw/swmm/source5_1_013.zip", exdir = "src/swmm")
 
 # Source code modifications -------------------------------------
 
-# we don't need the main.c file (this also causes warnings since main.c writes to stdout)
-unlink("src/swmm/main.c")
-
 # need to replace the two references to stdout, which cause
 # warnings and also are bad practice, since we want to write the
 # messages that get printed to stdout in a way that they can be
@@ -74,17 +71,28 @@ c(input_lines[
   # windows line returns in the original
   readr::write_lines("src/swmm/input.c", sep = "\r\n")
 
-# need to generate src/Makevars so that the swmm subdirectory
-# gets compiled into the main directory
-# another solution would be to just have all the src/swmm subdirectory
-# files in src/
-swmm_source_files <- list.files("src/swmm", pattern = "\\.c$")
-swmm_source_files %>%
-  paste0("swmm/", ., collapse = " ") %>%
-  paste0("SOURCES = ", .) %>%
-  c("OBJECTS = callSwmm.o RcppExports.o $(SOURCES:.c=.o)") %>%
-  readr::write_lines("src/Makevars")
+# we don't need the main.c file (this also causes warnings since main.c writes to stdout)
+unlink("src/swmm/main.c")
+
+# non-source files result in a package warning
+unlink(c("src/swmm/Roadmap.txt", "src/swmm/swmm5.def"))
+
+# ----- Clean previously installed SWMM files ----
+
+if(file.exists("data-raw/swmm_files.txt")) {
+  old_swmm_files <- readr::read_lines("data-raw/swmm_files.txt")
+  unlink(file.path("src", old_swmm_files))
+  unlink("data-raw/swmm_files.txt")
+}
+
+# ------ Make a list of files that were included from SWMM and move them to src/
+
+swmm_files <- list.files("src/swmm")
+file.rename(file.path("src/swmm", swmm_files), file.path("src", swmm_files))
+readr::write_lines(swmm_files, "data-raw/swmm_files.txt")
 
 # Cleanup ------------------------------
+
+unlink("src/swmm", recursive = TRUE)
 unlink("data-raw/swmm", recursive = TRUE)
 unlink("data-raw/swmm.zip")

@@ -1,16 +1,11 @@
 #include <Rcpp.h>
-#include "swmm/swmm5.h"
+#include "swmm5.h"
 using namespace Rcpp;
-
-// [[Rcpp::export]]
-NumericVector timesTwo(NumericVector x) {
-  return x * 2;
-}
 
 // [[Rcpp::export]]
 IntegerVector swmmVersion() {
 
-  // from swmm/main.c
+  // from main.c
   int  version, vMajor, vMinor, vRelease;
   version = swmm_getVersion();
   vMajor = version / 10000;
@@ -33,7 +28,7 @@ List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn) {
   swmm_run(inputFile, reportFile, binaryFile);
 
   // get any errors or warnings (why are these integers?)
-  // from swmm/main.c
+  // from main.c
   char errMsg[128];
   int  msgLen = 127;
   int error = swmm_getError(errMsg, msgLen);
