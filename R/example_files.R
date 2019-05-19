@@ -23,5 +23,5 @@ swmm_example_files <- function() {
 #' @rdname swmm_example_file
 #' @export
 swmm_example_dir <- function() {
-  system.file("swmm_examples", package = "swmmbin")
+  system.file("swmm_examples", package = "swmm")
 }
