@@ -13,7 +13,7 @@ swmm_example_files()
 swmm_example_dir()
 }
 \arguments{
-\item{file}{A file such as one listed by `swmm_example_files()`.}
+\item{file}{A file such as one listed by \code{swmm_example_files()}.}
 }
 \description{
 Get the path to an example input file

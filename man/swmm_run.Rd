@@ -14,12 +14,12 @@ swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE,
 
 \item{out}{Path to an output file (that does not yet exist or will be overwritten).}
 
-\item{overwrite}{Use `overwrite = TRUE` overwrite `rpt` and `out`.}
+\item{overwrite}{Use \code{overwrite = TRUE} overwrite \code{rpt} and \code{out}.}
 
 \item{quiet}{Silence default SWWM output.}
 }
 \description{
-This is intended to be a drop-in replacement for [swmmr::run_swmm()].
+This is intended to be a drop-in replacement for \code{\link[swmmr:run_swmm]{swmmr::run_swmm()}}.
 }
 \examples{
 swmm_run(swmm_example_file("Example1-Pre.inp"))
