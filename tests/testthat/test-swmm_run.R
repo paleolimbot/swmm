@@ -1,11 +1,49 @@
 
 test_that("all examples run", {
-  for(file in swmm_example_files()) {
-    expect_is(swmm_run(swmm_example_file(file)), "list")
+  # Example 9 includes references to other files in the input file. The SWMM
+  # tries to find these files in the working directory (it does respect R's working)
+  # directory, so `withr::with_dir(swmm_example_dir(), swmm_run("Example9.inp"))` works
+  for(file in setdiff(swmm_example_files(), "Example9.inp")) {
+    if(interactive()) message("swmm_run(\"", swmm_example_file(file), "\")")
+    result <- swmm_run(swmm_example_file(file))
+    expect_is(result, "list")
+    expect_true(file.exists(result$report_file))
+    expect_true(file.exists(result$binary_file))
+    expect_equal(result$error, 0)
   }
 })
 
 test_that("the quiet flag works", {
   expect_silent(swmm_run(swmm_example_file("Example1-Pre.inp"), quiet = TRUE))
-  expect_output(swmm_run(swmm_example_file("Example1-Pre.inp"), quiet = FALSE), "Simulation complete")
+  expect_output(swmm_run(swmm_example_file("Example1-Pre.inp"), quiet = FALSE))
+})
+
+test_that("the inp argument must be a valid existing file", {
+  expect_error(swmm_run(NULL))
+  expect_error(swmm_run(character(0)))
+  expect_error(swmm_run(tempfile()))
+})
+
+test_that("output arguments can be a specific (non-existing)", {
+  inp_file <- swmm_example_file("Example1-Pre.inp")
+
+  known_rpt <- as.character(fs::path_real(tempfile(fileext = ".rpt")))
+  expect_identical(swmm_run(inp_file, rpt = known_rpt)$report_file, known_rpt)
+
+  known_out <- as.character(fs::path_real(tempfile(fileext = ".out")))
+  expect_identical(swmm_run(inp_file, out = known_out)$binary_file, known_out)
+})
+
+test_that("output arguments can be files that will be overwritten", {
+  inp_file <- swmm_example_file("Example1-Pre.inp")
+
+  known_rpt <- as.character(fs::path_real(tempfile(fileext = ".rpt")))
+  expect_silent(swmm_run(inp_file, rpt = known_rpt))
+  expect_error(swmm_run(inp_file, rpt = known_rpt), "overwrite = TRUE")
+  expect_silent(swmm_run(inp_file, rpt = known_rpt, overwrite = TRUE))
+
+  known_out <- as.character(fs::path_real(tempfile(fileext = ".out")))
+  expect_silent(swmm_run(inp_file, out = known_out))
+  expect_error(swmm_run(inp_file, out = known_out), "overwrite = TRUE")
+  expect_silent(swmm_run(inp_file, out = known_out, overwrite = TRUE))
 })

@@ -27,7 +27,7 @@ List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn) {
   // run swmm (this can't be cancelled yet)
   swmm_run(inputFile, reportFile, binaryFile);
 
-  // get any errors or warnings (why are these integers?)
+  // get errors and warnings
   // from main.c
   char errMsg[128];
   int  msgLen = 127;

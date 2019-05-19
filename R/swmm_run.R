@@ -14,13 +14,14 @@
 #' @examples
 #' swmm_run(swmm_example_file("Example1-Pre.inp"))
 #'
+#' @importFrom assertthat is.scalar is.string assert_that
+#'
 swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRUE) {
   overwrite <- isTRUE(overwrite)
-  stopifnot(
-    is_valid_input_file(inp),
-    is_valid_output_file(rpt),
-    is_valid_output_file(out)
-  )
+
+  assert_that(is.character(inp), is.scalar(inp), file.exists(inp))
+  assert_that(is.null(rpt) || (is.character(rpt) && is.scalar(rpt)))
+  assert_that(is.null(out) || (is.character(out) && is.scalar(out)))
 
   if(is.null(rpt)) {
     rpt <- tempfile(fileext = ".rpt")
@@ -30,33 +31,28 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRU
     out <- tempfile(fileext = ".out")
   }
 
+  if(!overwrite && file.exists(rpt)) {
+    stop("File \"", rpt, "\" already exists. Use overwrite = TRUE to overwrite.")
+  }
+
+  if(!overwrite && file.exists(out)) {
+    stop("File \"", out, "\" already exists. Use overwrite = TRUE to overwrite.")
+  }
+
   if(quiet) {
     output_file <- tempfile()
-    # output_con <- file(output_file, open = "wt")
     sink(output_file)
     on.exit({sink(); unlink(output_file)})
   }
 
   output <- swmmRun(
-    fs::path_real(inp),
-    fs::path_real(rpt),
-    fs::path_real(out)
+    as_absolute_path(inp),
+    as_absolute_path(rpt),
+    as_absolute_path(out)
   )
 
   # make sure there's a newline before returning to R
-  if(!quiet) message("\n")
+  if(!quiet) cat("\n")
 
   output
-}
-
-is_valid_input_file <- function(path) {
-  is_valid_file(path) && file.exists(path)
-}
-
-is_valid_output_file <- function(path, overwrite = FALSE) {
-  is.null(path) || (overwrite && is_valid_input_file(path)) || is_valid_file(path)
-}
-
-is_valid_file <- function(path) {
-  is.character(path) && (length(path) == 1) && !is.na(path)
 }
