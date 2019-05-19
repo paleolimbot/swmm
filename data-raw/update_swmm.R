@@ -36,6 +36,55 @@ readr::read_file("src/swmm/swmm5.c") %>%
   ) %>%
   readr::write_file("src/swmm/swmm5.c")
 
+# there is a self-assign warning in input.c / match(), which is related to a confusing
+# but seemingly harmless practice of using the value of i
+# of a previous for-loop counter
+current_body_loc <- 771:787
+new_match_body <- "
+    int i,j,leadingWhitespace;
+
+    // --- fail if substring is empty
+    if (!substr[0]) return(0);
+
+    // --- skip leading blanks of str
+    leadingWhitespace = 0;
+    for (i = 0; str[i]; i++)
+    {
+        if (str[i] != ' ') {
+          leadingWhitespace = i;
+          break;
+        }
+    }
+
+    // --- check if substr matches remainder of str
+    for (i = leadingWhitespace,j = 0; substr[j]; i++,j++)
+    {
+        if (!str[i] || UCHAR(str[i]) != UCHAR(substr[j])) return(0);
+    }
+    return(1);
+"
+
+input_lines <- readr::read_lines("src/swmm/input.c")
+c(input_lines[
+  1:(min(current_body_loc) - 1)],
+  new_match_body,
+  input_lines[(max(current_body_loc + 1):length(input_lines))]
+) %>%
+  # using sep as \r\n makes for a better diff, since it has
+  # windows line returns in the original
+  readr::write_lines("src/swmm/input.c", sep = "\r\n")
+
+# need to generate src/Makevars so that the swmm subdirectory
+# gets compiled into the main directory
+# another solution would be to just have all the src/swmm subdirectory
+# files in src/
+swmm_source_files <- list.files("src/swmm", pattern = "\\.c$")
+swmm_source_files %>%
+  paste0("swmm/", ., collapse = " ") %>%
+  paste0("SOURCES = ", .) %>%
+  c("OBJECTS = callSwmm.o RcppExports.o $(SOURCES:.c=.o)") %>%
+  readr::write_lines("src/Makevars")
+
 # Cleanup ------------------------------
 unlink("data-raw/swmm", recursive = TRUE)
 unlink("data-raw/swmm.zip")
