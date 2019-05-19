@@ -768,23 +768,29 @@ int  match(char *str, char *substr)
 //           (not case sensitive).
 //
 {
-    int i,j;
+
+    int i,j,leadingWhitespace;
 
     // --- fail if substring is empty
     if (!substr[0]) return(0);
 
     // --- skip leading blanks of str
+    leadingWhitespace = 0;
     for (i = 0; str[i]; i++)
     {
-        if (str[i] != ' ') break;
+        if (str[i] != ' ') {
+          leadingWhitespace = i;
+          break;
+        }
     }
 
     // --- check if substr matches remainder of str
-    for (i = i,j = 0; substr[j]; i++,j++)
+    for (i = leadingWhitespace,j = 0; substr[j]; i++,j++)
     {
         if (!str[i] || UCHAR(str[i]) != UCHAR(substr[j])) return(0);
     }
     return(1);
+
 }
 
 //=============================================================================
