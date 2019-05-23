@@ -17,7 +17,6 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp,
-    fs,
     assertthat
 URL: https://github.com/paleolimbot/swmm
 BugReports: https://github.com/paleolimbot/swmm/issues

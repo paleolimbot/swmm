@@ -24,25 +24,31 @@ test_that("the inp argument must be a valid existing file", {
   expect_error(swmm_run(tempfile()))
 })
 
-test_that("output arguments can be a specific (non-existing)", {
+test_that("output arguments can be a specific (non-existing) file", {
   inp_file <- swmm_example_file("Example1-Pre.inp")
+  expect_path_equal <- function(p1, p2) {
+    expect_identical(
+      normalizePath(p1, mustWork = FALSE),
+      normalizePath(p1, mustWork = FALSE)
+    )
+  }
 
-  known_rpt <- as.character(fs::path_real(tempfile(fileext = ".rpt")))
-  expect_identical(swmm_run(inp_file, rpt = known_rpt)$report_file, known_rpt)
+  known_rpt <- tempfile(fileext = ".rpt")
+  expect_path_equal(swmm_run(inp_file, rpt = known_rpt)$report_file, known_rpt)
 
-  known_out <- as.character(fs::path_real(tempfile(fileext = ".out")))
-  expect_identical(swmm_run(inp_file, out = known_out)$binary_file, known_out)
+  known_out <- tempfile(fileext = ".out")
+  expect_path_equal(swmm_run(inp_file, out = known_out)$binary_file, known_out)
 })
 
 test_that("output arguments can be files that will be overwritten", {
   inp_file <- swmm_example_file("Example1-Pre.inp")
 
-  known_rpt <- as.character(fs::path_real(tempfile(fileext = ".rpt")))
+  known_rpt <- tempfile(fileext = ".rpt")
   expect_silent(swmm_run(inp_file, rpt = known_rpt))
   expect_error(swmm_run(inp_file, rpt = known_rpt), "overwrite = TRUE")
   expect_silent(swmm_run(inp_file, rpt = known_rpt, overwrite = TRUE))
 
-  known_out <- as.character(fs::path_real(tempfile(fileext = ".out")))
+  known_out <- tempfile(fileext = ".out")
   expect_silent(swmm_run(inp_file, out = known_out))
   expect_error(swmm_run(inp_file, out = known_out), "overwrite = TRUE")
   expect_silent(swmm_run(inp_file, out = known_out, overwrite = TRUE))

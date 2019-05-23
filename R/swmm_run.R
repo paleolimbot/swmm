@@ -26,17 +26,29 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRU
   if(is.null(rpt)) {
     rpt <- tempfile(fileext = ".rpt")
   }
-
   if(is.null(out)) {
     out <- tempfile(fileext = ".out")
   }
-
   if(!overwrite && file.exists(rpt)) {
     stop("File \"", rpt, "\" already exists. Use overwrite = TRUE to overwrite.")
   }
-
   if(!overwrite && file.exists(out)) {
     stop("File \"", out, "\" already exists. Use overwrite = TRUE to overwrite.")
+  }
+
+  # create paths here that both R and C can understand
+  inp <- sanitize_c_path(inp)
+  rpt <- sanitize_c_path(rpt)
+  out <- sanitize_c_path(out)
+
+  # on Windows, files must exist before SWMM is called
+  # on not Windows, this doesn't cause a failure
+  if(!file.exists(rpt)) {
+    if(!file.create(rpt)) stop("Could not create report file '", rpt, "'")
+  }
+
+  if(!file.exists(out)) {
+    if(!file.create(out)) stop("Could not create output file '", out, "'")
   }
 
   if(quiet) {
@@ -45,14 +57,37 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRU
     on.exit({sink(); unlink(output_file)})
   }
 
-  output <- swmmRun(
-    as_absolute_path(inp),
-    as_absolute_path(rpt),
-    as_absolute_path(out)
-  )
+  # runn SWMM
+  output <- swmmRun(inp, rpt, out)
+
+  # convert paths back to R-friendly paths
+  file_items <- c("input_file", "report_file", "binary_file")
+  output[file_items] <- lapply(output[file_items], sanitize_path)
 
   # make sure there's a newline before returning to R
   if(!quiet) cat("\n")
 
   output
+}
+
+# on Windows, the C functions need path to have
+# backslashes instead of forward slashses
+sanitize_c_path <- function(path) {
+  normalizePath(path, mustWork = FALSE)
+}
+
+sanitize_path <- function(path) {
+  gsub("\\\\", "/", normalizePath(path, mustWork = FALSE))
+}
+
+is_valid_input_file <- function(path) {
+  is_valid_file(path) && file.exists(path)
+}
+
+is_valid_output_file <- function(path, overwrite = FALSE) {
+  is.null(path) || (overwrite && is_valid_input_file(path)) || is_valid_file(path)
+}
+
+is_valid_file <- function(path) {
+  is.character(path) && (length(path) == 1) && !is.na(path)
 }
