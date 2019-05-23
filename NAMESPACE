@@ -3,6 +3,7 @@
 export(swmm_example_dir)
 export(swmm_example_file)
 export(swmm_example_files)
+export(swmm_out_variables)
 export(swmm_run)
 export(swmm_version)
 importFrom(Rcpp,sourceCpp)
