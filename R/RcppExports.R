@@ -9,3 +9,19 @@ swmmRun <- function(inputFileIn, reportFileIn, binaryFileIn) {
     .Call(`_swmm_swmmRun`, inputFileIn, reportFileIn, binaryFileIn)
 }
 
+OpenSwmmOutFile <- function(outFile) {
+    .Call(`_swmm_OpenSwmmOutFile`, outFile)
+}
+
+GetSwmmResult <- function(iType, iIndex, vIndex) {
+    .Call(`_swmm_GetSwmmResult`, iType, iIndex, vIndex)
+}
+
+GetSwmmTimes <- function() {
+    .Call(`_swmm_GetSwmmTimes`)
+}
+
+CloseSwmmOutFile <- function() {
+    .Call(`_swmm_CloseSwmmOutFile`)
+}
+

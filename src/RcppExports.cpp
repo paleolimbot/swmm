@@ -28,10 +28,58 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// OpenSwmmOutFile
+List OpenSwmmOutFile(const char* outFile);
+RcppExport SEXP _swmm_OpenSwmmOutFile(SEXP outFileSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const char* >::type outFile(outFileSEXP);
+    rcpp_result_gen = Rcpp::wrap(OpenSwmmOutFile(outFile));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GetSwmmResult
+Rcpp::NumericVector GetSwmmResult(int iType, int iIndex, int vIndex);
+RcppExport SEXP _swmm_GetSwmmResult(SEXP iTypeSEXP, SEXP iIndexSEXP, SEXP vIndexSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type iType(iTypeSEXP);
+    Rcpp::traits::input_parameter< int >::type iIndex(iIndexSEXP);
+    Rcpp::traits::input_parameter< int >::type vIndex(vIndexSEXP);
+    rcpp_result_gen = Rcpp::wrap(GetSwmmResult(iType, iIndex, vIndex));
+    return rcpp_result_gen;
+END_RCPP
+}
+// GetSwmmTimes
+Rcpp::NumericVector GetSwmmTimes();
+RcppExport SEXP _swmm_GetSwmmTimes() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(GetSwmmTimes());
+    return rcpp_result_gen;
+END_RCPP
+}
+// CloseSwmmOutFile
+int CloseSwmmOutFile();
+RcppExport SEXP _swmm_CloseSwmmOutFile() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(CloseSwmmOutFile());
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_swmm_swmmVersion", (DL_FUNC) &_swmm_swmmVersion, 0},
     {"_swmm_swmmRun", (DL_FUNC) &_swmm_swmmRun, 3},
+    {"_swmm_OpenSwmmOutFile", (DL_FUNC) &_swmm_OpenSwmmOutFile, 1},
+    {"_swmm_GetSwmmResult", (DL_FUNC) &_swmm_GetSwmmResult, 3},
+    {"_swmm_GetSwmmTimes", (DL_FUNC) &_swmm_GetSwmmTimes, 0},
+    {"_swmm_CloseSwmmOutFile", (DL_FUNC) &_swmm_CloseSwmmOutFile, 0},
     {NULL, NULL, 0}
 };
 

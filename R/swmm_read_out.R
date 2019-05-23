@@ -1,4 +1,9 @@
 
+swmm_read_out_raw <- function(out) {
+  on.exit(CloseSwmmOutFile())
+  OpenSwmmOutFile(out)
+}
+
 #' Get out file variable information
 #'
 #' @param pollutant_names Optional names of pollutants in the system
