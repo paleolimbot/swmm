@@ -12,3 +12,6 @@ withr::with_dir("inst/swmm_examples", {
     )
   }
 })
+
+# the out files are too big, we can only keep the reports
+unlink(list.files("inst/swmm_examples", pattern = "\\.out$", full.names = TRUE))

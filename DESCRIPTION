@@ -17,7 +17,10 @@ LinkingTo:
     Rcpp
 Imports: 
     Rcpp,
-    assertthat
+    assertthat,
+    purrr,
+    tidyr,
+    rlang
 URL: https://github.com/paleolimbot/swmm
 BugReports: https://github.com/paleolimbot/swmm/issues
 Suggests: 

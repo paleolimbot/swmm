@@ -14,7 +14,7 @@
 #' @examples
 #' swmm_run(swmm_example_file("Example1-Pre.inp"))
 #'
-#' @importFrom assertthat is.scalar is.string assert_that
+#' @importFrom assertthat is.scalar assert_that
 #'
 swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRUE) {
   overwrite <- isTRUE(overwrite)

@@ -65,8 +65,6 @@ out_variables <- map_dfr(type_choices, ~tibble(description = .), .id = "element_
   mutate(type_index = match(element_type, names(type_choices)) - 1) %>%
   extract(description, "unit", "\\((.*?)\\)", remove = FALSE) %>%
   extract(description, "variable_name", "^([^\\(]+)") %>%
-  mutate(unit = unit %>% str_replace_all("deg. (C|F)", "deg.\\1")) %>%
-  extract(unit, c("imperial_unit", "metric_unit"), "([^ ]+) or ([^ ,]+)", remove = FALSE) %>%
   mutate(
     variable_name = str_trim(variable_name),
     variable = variable_name %>%
