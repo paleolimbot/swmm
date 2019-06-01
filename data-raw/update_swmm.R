@@ -1,4 +1,6 @@
 
+`%>%` <- magrittr::`%>%`
+
 curl::curl_download(
   "https://www.epa.gov/sites/production/files/2018-08/swmm51013_engine_0.zip",
   "data-raw/swmm.zip"
@@ -21,15 +23,23 @@ utils::unzip("data-raw/swmm/source5_1_013.zip", exdir = "src/swmm")
 # messages that get printed to stdout in a way that they can be
 # captured by the R session (i.e., sink()). The C way of doing this
 # is Rprintf().
-# this isn't a perfect regex, but should work for this and future versions
+#
+# similarly, we need to insert a check for R interrupts so that
+# simulations can be cancelled
+#
+# these aren't perfect regexes, but should work for this and future versions
 readr::read_file("src/swmm/swmm5.c") %>%
+  stringr::str_replace(
+    "#include <stdlib.h>",
+    "#include <stdlib.h>\n#include <R.h>"
+  ) %>%
   stringr::str_replace(
     "(void\\s+writecon\\(char\\s+\\*\\s*s\\)[^{]*\\{\\s*)([^}])*(\\})",
     "\\1Rprintf(s);\n\\3"
   ) %>%
   stringr::str_replace(
-    "#include <stdlib.h>",
-    "#include <stdlib.h>\n#include <R.h>"
+    "\r?\n(\\s*)(swmm_step\\(&elapsedTime\\);)",
+    "\n\\1R_CheckUserInterrupt();\n\\1swmm_step(&elapsedTime);"
   ) %>%
   readr::write_file("src/swmm/swmm5.c")
 
