@@ -1,6 +1,8 @@
 
 library(tidyverse)
 
+# Output variables ------
+
 # this is from the swmmr package
 # https://github.com/dleutnant/swmmr/blob/master/R/read_out_helper.R#L66-L113
 type_choices <- list(
@@ -78,4 +80,18 @@ out_variables <- map_dfr(type_choices, ~tibble(description = .), .id = "element_
   ungroup() %>%
   select(type_index, element_type, variable_index, variable, everything())
 
-usethis::use_data(out_variables, internal = TRUE, overwrite = TRUE)
+# Error messages -----
+
+error_messages <- tibble(lines = read_lines("src/error.c")) %>%
+  extract(lines, c("code", "message"), 'ERR([0-9]+)\\s+"(.*?)"') %>%
+  filter(!is.na(code)) %>%
+  mutate(
+    code = as.integer(code),
+    message = message %>%
+      str_remove("^[^:]*:") %>%
+      str_trim()
+  )
+
+# Use data -----
+
+usethis::use_data(out_variables, error_messages, internal = TRUE, overwrite = TRUE)

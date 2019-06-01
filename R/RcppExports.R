@@ -5,8 +5,8 @@ swmmVersion <- function() {
     .Call(`_swmm_swmmVersion`)
 }
 
-swmmRun <- function(inputFileIn, reportFileIn, binaryFileIn) {
-    .Call(`_swmm_swmmRun`, inputFileIn, reportFileIn, binaryFileIn)
+swmmRun <- function(inpFile, rptFile, outFile) {
+    .Call(`_swmm_swmmRun`, inpFile, rptFile, outFile)
 }
 
 OpenSwmmOutFile <- function(outFile) {

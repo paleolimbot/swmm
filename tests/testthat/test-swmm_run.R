@@ -7,9 +7,9 @@ test_that("all examples run", {
     if(interactive()) message("swmm_run(\"", swmm_example_file(file), "\")")
     result <- swmm_run(swmm_example_file(file))
     expect_is(result, "list")
-    expect_true(file.exists(result$report_file))
-    expect_true(file.exists(result$binary_file))
-    expect_equal(result$error, 0)
+    expect_true(file.exists(result$rpt))
+    expect_true(file.exists(result$out))
+    expect_equal(result$last_error, 0)
   }
 })
 
@@ -34,10 +34,10 @@ test_that("output arguments can be a specific (non-existing) file", {
   }
 
   known_rpt <- tempfile(fileext = ".rpt")
-  expect_path_equal(swmm_run(inp_file, rpt = known_rpt)$report_file, known_rpt)
+  expect_path_equal(swmm_run(inp_file, rpt = known_rpt)$rpt, known_rpt)
 
   known_out <- tempfile(fileext = ".out")
-  expect_path_equal(swmm_run(inp_file, out = known_out)$binary_file, known_out)
+  expect_path_equal(swmm_run(inp_file, out = known_out)$out, known_out)
 })
 
 test_that("output arguments can be files that will be overwritten", {
@@ -52,4 +52,11 @@ test_that("output arguments can be files that will be overwritten", {
   expect_silent(swmm_run(inp_file, out = known_out))
   expect_error(swmm_run(inp_file, out = known_out), "overwrite = TRUE")
   expect_silent(swmm_run(inp_file, out = known_out, overwrite = TRUE))
+})
+
+test_that("swmm errors result in an R error", {
+  expect_error(
+    swmm_run(swmm_example_file("Example9.inp")),
+    "cannot open rainfall data"
+  )
 })

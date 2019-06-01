@@ -44,11 +44,11 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRU
   # on Windows, files must exist before SWMM is called
   # on not Windows, this doesn't cause a failure
   if(!file.exists(rpt)) {
-    if(!file.create(rpt)) stop("Could not create report file '", rpt, "'")
+    if(!file.create(rpt, showWarnings = FALSE)) stop("Could not create report file '", rpt, "'")
   }
 
   if(!file.exists(out)) {
-    if(!file.create(out)) stop("Could not create output file '", out, "'")
+    if(!file.create(out, showWarnings = FALSE)) stop("Could not create output file '", out, "'")
   }
 
   if(quiet) {
@@ -61,11 +61,16 @@ swmm_run <- function(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRU
   output <- swmmRun(inp, rpt, out)
 
   # convert paths back to R-friendly paths
-  file_items <- c("input_file", "report_file", "binary_file")
+  file_items <- c("inp", "rpt", "out")
   output[file_items] <- lapply(output[file_items], sanitize_path)
 
   # make sure there's a newline before returning to R
   if(!quiet) cat("\n")
+
+  # if there's an error, stop() with the message
+  if(output$last_error != 0) {
+    stop("SWMM: ", extract_error_message(output), call. = FALSE)
+  }
 
   output
 }
@@ -90,4 +95,16 @@ is_valid_output_file <- function(path, overwrite = FALSE) {
 
 is_valid_file <- function(path) {
   is.character(path) && (length(path) == 1) && !is.na(path)
+}
+
+extract_error_message <- function(output) {
+  if(file.exists(output$rpt)) {
+    rpt_lines <- readr::read_lines(output$rpt)
+    error_lines <- rpt_lines[grepl("ERROR", rpt_lines)]
+
+    return(paste(trimws(gsub("ERROR [0-9]*:?", "", error_lines)), collapse = "\n"))
+  }
+
+  # this line is probably never reached but is a good defensive fallback
+  error_messages$message[match(output$last_error, error_messages$code)]
 }

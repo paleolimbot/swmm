@@ -20,7 +20,8 @@ Imports:
     assertthat,
     purrr,
     tidyr,
-    rlang
+    rlang,
+    readr
 URL: https://github.com/paleolimbot/swmm
 BugReports: https://github.com/paleolimbot/swmm/issues
 Suggests: 

@@ -16,32 +16,34 @@ IntegerVector swmmVersion() {
 }
 
 // [[Rcpp::export]]
-List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn) {
+List swmmRun(String inpFile, String rptFile, String outFile) {
 
   // I have no idea what the difference between char* and const char* is
   // casting seems to work
-  char* inputFile = (char *)inputFileIn.get_cstring();
-  char* reportFile = (char *)reportFileIn.get_cstring();
-  char* binaryFile = (char *)binaryFileIn.get_cstring();
+  char* inputFile = (char *)inpFile.get_cstring();
+  char* reportFile = (char *)rptFile.get_cstring();
+  char* binaryFile = (char *)outFile.get_cstring();
 
-  // run swmm (this can't be cancelled yet)
+  // run swmm (this has a built-in check for interrupts)
   swmm_run(inputFile, reportFile, binaryFile);
 
   // get errors and warnings
+  // I think this is the code of the *last* error and the *last* warning
+  // (or 0 if there was none).
   // from main.c
   char errMsg[128];
   int  msgLen = 127;
-  int error = swmm_getError(errMsg, msgLen);
-  int warning = swmm_getWarnings();
+  int last_error = swmm_getError(errMsg, msgLen);
+  int last_warning = swmm_getWarnings();
 
   // output is a named list, the class of which
   // we can deal with in R
   List out = List::create(
-    Named("input_file") = inputFileIn,
-    Named("report_file") = reportFileIn,
-    Named("binary_file") = binaryFileIn,
-    Named("error") = error,
-    Named("warning") = warning
+    Named("inp") = inpFile,
+    Named("rpt") = rptFile,
+    Named("out") = outFile,
+    Named("last_error") = last_error,
+    Named("last_warning") = last_warning
   );
 
   return out;

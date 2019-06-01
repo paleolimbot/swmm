@@ -16,15 +16,15 @@ BEGIN_RCPP
 END_RCPP
 }
 // swmmRun
-List swmmRun(String inputFileIn, String reportFileIn, String binaryFileIn);
-RcppExport SEXP _swmm_swmmRun(SEXP inputFileInSEXP, SEXP reportFileInSEXP, SEXP binaryFileInSEXP) {
+List swmmRun(String inpFile, String rptFile, String outFile);
+RcppExport SEXP _swmm_swmmRun(SEXP inpFileSEXP, SEXP rptFileSEXP, SEXP outFileSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< String >::type inputFileIn(inputFileInSEXP);
-    Rcpp::traits::input_parameter< String >::type reportFileIn(reportFileInSEXP);
-    Rcpp::traits::input_parameter< String >::type binaryFileIn(binaryFileInSEXP);
-    rcpp_result_gen = Rcpp::wrap(swmmRun(inputFileIn, reportFileIn, binaryFileIn));
+    Rcpp::traits::input_parameter< String >::type inpFile(inpFileSEXP);
+    Rcpp::traits::input_parameter< String >::type rptFile(rptFileSEXP);
+    Rcpp::traits::input_parameter< String >::type outFile(outFileSEXP);
+    rcpp_result_gen = Rcpp::wrap(swmmRun(inpFile, rptFile, outFile));
     return rcpp_result_gen;
 END_RCPP
 }
