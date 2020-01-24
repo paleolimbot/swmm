@@ -4,8 +4,7 @@
 \alias{swmm_run}
 \title{Initiate a simulation run}
 \usage{
-swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE,
-  quiet = TRUE)
+swmm_run(inp, rpt = NULL, out = NULL, overwrite = FALSE, quiet = TRUE)
 }
 \arguments{
 \item{inp}{Path to an input file.}

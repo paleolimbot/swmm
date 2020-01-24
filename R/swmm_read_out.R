@@ -21,11 +21,15 @@ swmm_read_out <- function(path, element_type = NULL, variable = NULL, object_nam
   }
   if(!is.null(variable)) {
     assert_that(is.character(variable))
-    out_vars <- out_vars[out_vars$element_type %in% variable, ]
+    out_vars <- out_vars[out_vars$variable %in% variable, ]
   }
   if(!is.null(object_name)) {
     assert_that(is.character(object_name))
     out_vars <- out_vars[out_vars$object_name %in% object_name, ]
+  }
+
+  if (nrow(out_vars) == 0) {
+    stop("Zero output variable/object combinations were selected")
   }
 
   indices <- out_vars[c("type_index", "variable_index", "object_index")]
@@ -33,7 +37,7 @@ swmm_read_out <- function(path, element_type = NULL, variable = NULL, object_nam
 
   out_vars$value <- purrr::pmap(indices, swmm_read_out_index)
   out_vars$step <- purrr::map(out_vars$value, seq_along)
-  tidyr::unnest(out_vars, .data$value, .data$step)
+  tidyr::unnest(out_vars, c(.data$value, .data$step))
 }
 
 #' Read .out file convenience functions
@@ -55,7 +59,7 @@ swmm_read_variables <- function(path) {
     nodes = meta$nodes$names
   )
 
-  merge(variables, objects, all = FALSE)
+  tibble::as_tibble(merge(variables, objects, all = FALSE))
 }
 
 #' @rdname swmm_read_variables
