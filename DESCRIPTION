@@ -21,7 +21,8 @@ Imports:
     purrr,
     tidyr,
     rlang,
-    readr
+    readr,
+    tibble
 URL: https://github.com/paleolimbot/swmm
 BugReports: https://github.com/paleolimbot/swmm/issues
 Suggests: 
