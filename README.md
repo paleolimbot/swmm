@@ -18,7 +18,7 @@ States Environmental Protection Agency](https://www.epa.gov/)’s
 [Stormwater Management Model
 (SWMM)](https://www.epa.gov/water-research/storm-water-management-model-swmm)
 (the [source for SWMM is also available on
-GitHub](https://github.com/USEPA/Stormwater-Management-Model).
+GitHub](https://github.com/USEPA/Stormwater-Management-Model)).
 
 ## Installation
 
@@ -48,10 +48,10 @@ result
 #> [1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library/swmm/swmm_examples/Example8.inp"
 #> 
 #> $rpt
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpfJuNSQ/file106f025fadd28.rpt"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpUZ9MT3/file115153e4e1ade.rpt"
 #> 
 #> $out
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpfJuNSQ/file106f078cd8092.out"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpUZ9MT3/file1151579c604c6.out"
 #> 
 #> $last_error
 #> [1] 0

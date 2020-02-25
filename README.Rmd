@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-The goal of swmm is to provide a cross-platform interface to the [United States Environmental Protection Agency](https://www.epa.gov/)'s [Stormwater Management Model (SWMM)](https://www.epa.gov/water-research/storm-water-management-model-swmm) (the [source for SWMM is also available on GitHub](https://github.com/USEPA/Stormwater-Management-Model).
+The goal of swmm is to provide a cross-platform interface to the [United States Environmental Protection Agency](https://www.epa.gov/)'s [Stormwater Management Model (SWMM)](https://www.epa.gov/water-research/storm-water-management-model-swmm) (the [source for SWMM is also available on GitHub](https://github.com/USEPA/Stormwater-Management-Model)).
 
 ## Installation
 
