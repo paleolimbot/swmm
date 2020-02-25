@@ -20,9 +20,9 @@
 extern double Qcf[];                   // flow units conversion factors
                                        // (see swmm5.c)
 
-//-----------------------------------------------------------------------------                  
+//-----------------------------------------------------------------------------
 //  Shared variables
-//-----------------------------------------------------------------------------                  
+//-----------------------------------------------------------------------------
 static int      IfaceFlowUnits;        // flow units for routing interface file
 static int      IfaceStep;             // interface file time step (sec)
 static int      NumIfacePolluts;       // number of pollutants in interface file
@@ -283,7 +283,7 @@ void iface_saveOutletResults(DateTime reportDate, FILE* file)
 //
 {
     int i, p, yr, mon, day, hr, min, sec;
-    char theDate[25];
+    char theDate[77];
     datetime_decodeDate(reportDate, &yr, &mon, &day);
     datetime_decodeTime(reportDate, &hr, &min, &sec);
     sprintf(theDate, " %04d %02d  %02d  %02d  %02d  %02d ",
@@ -455,7 +455,7 @@ int  getIfaceFilePolluts()
     int   i, j;
     char  line[MAXLINE+1];             // line from inflows interface file
     char  s1[MAXLINE+1];               // general string variable
-    char  s2[MAXLINE+1];         
+    char  s2[MAXLINE+1];
 
     // --- read number of pollutants (minus FLOW)
     fgets(line, MAXLINE, Finflows.file);
@@ -583,7 +583,7 @@ void readNewIfaceValues()
         // --- parse flow value
         s = strtok(NULL, SEPSTR);
         if ( s == NULL ) return;
-        NewIfaceValues[i][0] = atof(s) / Qcf[IfaceFlowUnits]; 
+        NewIfaceValues[i][0] = atof(s) / Qcf[IfaceFlowUnits];
 
         // --- parse pollutant values
         for (j=1; j<=NumIfacePolluts; j++)
@@ -606,7 +606,7 @@ void setOldIfaceValues()
 //
 //  Input:   none
 //  Output:  none
-//  Purpose: replaces old values read from routing interface file with new ones. 
+//  Purpose: replaces old values read from routing interface file with new ones.
 //
 {
     int i, j;
