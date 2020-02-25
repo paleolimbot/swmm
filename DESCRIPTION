@@ -23,7 +23,7 @@ Imports:
     rlang,
     readr,
     tibble
-URL: https://github.com/paleolimbot/swmm
+URL: https://paleolimbot.github.io/swmm, https://github.com/paleolimbot/swmm
 BugReports: https://github.com/paleolimbot/swmm/issues
 Suggests: 
     swmmr,
