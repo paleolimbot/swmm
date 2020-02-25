@@ -48,10 +48,10 @@ result
 #> [1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library/swmm/swmm_examples/Example8.inp"
 #> 
 #> $rpt
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpCbof3c/file106566a9282be.rpt"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpfJuNSQ/file106f025fadd28.rpt"
 #> 
 #> $out
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpCbof3c/file1065638c5be9b.out"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpfJuNSQ/file106f078cd8092.out"
 #> 
 #> $last_error
 #> [1] 0
@@ -70,7 +70,7 @@ swmm_version()
 
 ## Reading swmm output
 
-Use the `swmm_read_*()` functions:
+Use the `swmm_read_*()` functions (highly experimental):
 
 ``` r
 out_file <- result$out

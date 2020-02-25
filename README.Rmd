@@ -58,7 +58,7 @@ swmm_version()
 
 ## Reading swmm output
 
-Use the `swmm_read_*()` functions:
+Use the `swmm_read_*()` functions (highly experimental):
 
 ```{r}
 out_file <- result$out
