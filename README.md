@@ -44,19 +44,19 @@ Run SWMM using the `swmm_run()` function and an “.inp” input file.
 ``` r
 result <- swmm_run(swmm_example_file("Example8.inp"))
 result
-#> $input_file
+#> $inp
 #> [1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library/swmm/swmm_examples/Example8.inp"
 #> 
-#> $report_file
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpRh0r7t/file29a2633eb8eb.rpt"
+#> $rpt
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpCbof3c/file106566a9282be.rpt"
 #> 
-#> $binary_file
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpRh0r7t/file29a22ade7f34.out"
+#> $out
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpCbof3c/file1065638c5be9b.out"
 #> 
-#> $error
+#> $last_error
 #> [1] 0
 #> 
-#> $warning
+#> $last_warning
 #> [1] 0
 ```
 
@@ -68,12 +68,12 @@ swmm_version()
 #> [1] "5.1.13"
 ```
 
-## Reading swmmr output
+## Reading swmm output
 
 Use the `swmm_read_*()` functions:
 
 ``` r
-out_file <- result$binary_file
+out_file <- result$out
 
 swmm_read_subcatchments(out_file)
 #> # A tibble: 5,040 x 10
@@ -96,16 +96,16 @@ swmm_read_links(out_file)
 #> # A tibble: 25,200 x 7
 #>    object_name  step average_water capacity flow_rate flow_velocity
 #>    <chr>       <int>         <dbl>    <dbl>     <dbl>         <dbl>
-#>  1 C_Aux3          1     0.0001000  8.33e-6         0             0
-#>  2 C_Aux3          2     0.0001000  8.33e-6         0             0
-#>  3 C_Aux3          3     0.0001000  8.33e-6         0             0
-#>  4 C_Aux3          4     0.0001000  8.33e-6         0             0
-#>  5 C_Aux3          5     0.0001000  8.33e-6         0             0
-#>  6 C_Aux3          6     0.0001000  8.33e-6         0             0
-#>  7 C_Aux3          7     0.0001000  8.33e-6         0             0
-#>  8 C_Aux3          8     0.0001000  8.33e-6         0             0
-#>  9 C_Aux3          9     0.0001000  8.33e-6         0             0
-#> 10 C_Aux3         10     0.0001000  8.33e-6         0             0
+#>  1 C_Aux3          1      0.000100  8.33e-6         0             0
+#>  2 C_Aux3          2      0.000100  8.33e-6         0             0
+#>  3 C_Aux3          3      0.000100  8.33e-6         0             0
+#>  4 C_Aux3          4      0.000100  8.33e-6         0             0
+#>  5 C_Aux3          5      0.000100  8.33e-6         0             0
+#>  6 C_Aux3          6      0.000100  8.33e-6         0             0
+#>  7 C_Aux3          7      0.000100  8.33e-6         0             0
+#>  8 C_Aux3          8      0.000100  8.33e-6         0             0
+#>  9 C_Aux3          9      0.000100  8.33e-6         0             0
+#> 10 C_Aux3         10      0.000100  8.33e-6         0             0
 #> # … with 25,190 more rows, and 1 more variable: volume_of <dbl>
 swmm_read_nodes(out_file)
 #> # A tibble: 22,320 x 8
@@ -144,29 +144,9 @@ swmm_read_system(out_file)
 #> #   runoff <dbl>, snow_depth <dbl>
 ```
 
-For fine-grained control over the output, use `swmm_read_out()`:
-
-``` r
-swmm_read_out(out_file)
-#> # A tibble: 311,040 x 10
-#>    element_type type_index variable_index variable variable_name unit 
-#>    <chr>             <dbl>          <dbl> <chr>    <chr>         <chr>
-#>  1 links                 2              0 flow_ra… flow rate     flow…
-#>  2 links                 2              0 flow_ra… flow rate     flow…
-#>  3 links                 2              0 flow_ra… flow rate     flow…
-#>  4 links                 2              0 flow_ra… flow rate     flow…
-#>  5 links                 2              0 flow_ra… flow rate     flow…
-#>  6 links                 2              0 flow_ra… flow rate     flow…
-#>  7 links                 2              0 flow_ra… flow rate     flow…
-#>  8 links                 2              0 flow_ra… flow rate     flow…
-#>  9 links                 2              0 flow_ra… flow rate     flow…
-#> 10 links                 2              0 flow_ra… flow rate     flow…
-#> # … with 311,030 more rows, and 4 more variables: object_name <chr>,
-#> #   object_index <dbl>, value <dbl>, step <int>
-```
-
 To find out which variables there are to choose from (for the purposes
-of only reading part of the output), use `swmm_read_variables()`:
+of only reading part of the output, which you probably want to do), use
+`swmm_read_variables()`:
 
 ``` r
 swmm_read_variables(out_file)

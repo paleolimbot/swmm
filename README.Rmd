@@ -56,12 +56,12 @@ You can find out which version of SWMM is included in the package with `swmm_ver
 swmm_version()
 ```
 
-## Reading swmmr output
+## Reading swmm output
 
 Use the `swmm_read_*()` functions:
 
 ```{r}
-out_file <- result$binary_file
+out_file <- result$out
 
 swmm_read_subcatchments(out_file)
 swmm_read_links(out_file)
@@ -69,13 +69,7 @@ swmm_read_nodes(out_file)
 swmm_read_system(out_file)
 ```
 
-For fine-grained control over the output, use `swmm_read_out()`:
-
-```{r}
-swmm_read_out(out_file)
-```
-
-To find out which variables there are to choose from (for the purposes of only reading part of the output), use `swmm_read_variables()`:
+To find out which variables there are to choose from (for the purposes of only reading part of the output, which you probably want to do), use `swmm_read_variables()`:
 
 ```{r}
 swmm_read_variables(out_file)
