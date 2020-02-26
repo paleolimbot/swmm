@@ -75,3 +75,17 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
+
+      - name: Build
+        run: |
+          pkg_path <- pkgbuild::build(binary = TRUE)
+          dir.create("build")
+          file.copy(pkg_path, "build")
+        shell: Rscript {0}
+
+      - name: Upload build results
+        if: success()
+        uses: actions/upload-artifact@master
+        with:
+          name: ${{ runner.os }}-r${{ matrix.config.r }}-build
+          path: build
