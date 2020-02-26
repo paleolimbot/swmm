@@ -22,7 +22,24 @@ GitHub](https://github.com/USEPA/Stormwater-Management-Model)).
 
 ## Installation
 
-You can install the development version from
+The swmm package is not on CRAN, but you can install a recent
+development binary with:
+
+``` r
+# Mac
+remotes::install_url(
+  "https://github.com/paleolimbot/swmm/releases/download/v0.0.9000/swmm_0.0.0.9000.tgz", 
+  build = FALSE
+)
+
+# Windows
+remotes::install_url(
+  "https://github.com/paleolimbot/swmm/releases/download/v0.0.9000/swmm_0.0.0.9000.zip", 
+  build = FALSE
+)
+```
+
+You can install and build the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -35,6 +52,7 @@ install SWMM (the package contains a copy).
 
 ``` r
 library(swmm)
+#> Warning: package 'swmm' was built under R version 3.6.2
 ```
 
 ## Running SWMM
@@ -48,10 +66,10 @@ result
 #> [1] "/Library/Frameworks/R.framework/Versions/3.6/Resources/library/swmm/swmm_examples/Example8.inp"
 #> 
 #> $rpt
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpUZ9MT3/file115153e4e1ade.rpt"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpQPw99t/file1304b2e8530de.rpt"
 #> 
 #> $out
-#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpUZ9MT3/file1151579c604c6.out"
+#> [1] "/private/var/folders/bq/2rcjstv90nx1_wrt8d3gqw6m0000gn/T/RtmpQPw99t/file1304b2a4b56ae.out"
 #> 
 #> $last_error
 #> [1] 0

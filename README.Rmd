@@ -28,7 +28,23 @@ The goal of swmm is to provide a cross-platform interface to the [United States 
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+The swmm package is not on CRAN, but you can install a recent development binary with:
+
+```{r, eval = FALSE}
+# Mac
+remotes::install_url(
+  "https://github.com/paleolimbot/swmm/releases/download/v0.0.9000/swmm_0.0.0.9000.tgz", 
+  build = FALSE
+)
+
+# Windows
+remotes::install_url(
+  "https://github.com/paleolimbot/swmm/releases/download/v0.0.9000/swmm_0.0.0.9000.zip", 
+  build = FALSE
+)
+```
+
+You can install and build the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
